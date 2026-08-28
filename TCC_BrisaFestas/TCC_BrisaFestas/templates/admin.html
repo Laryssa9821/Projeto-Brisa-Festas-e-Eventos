@@ -1,0 +1,173 @@
+<!-- templates/admin.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Painel Admin - Eventos</title>
+
+  <!-- CSS do painel (coloque em static/css/admin.css) -->
+  <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-header-left">
+      <h1>🎉 BrisaFestas — Painel</h1>
+    </div>
+    <div class="admin-header-right top-actions">
+      <button id="btn-new-event" class="btn-primary">+ Novo Evento</button>
+      <button id="btn-logout" class="btn-ghost">Sair</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-aside" aria-label="Navegação do painel">
+      <nav>
+        <ul>
+          <li><a href="/admin">Eventos</a></li>
+          <li><a href="/admin/dashboard">Dashboard</a></li>
+          <li><a href="/admin/employees">Funcionários</a></li>
+          <li><a href="/admin/clients">Clientes</a></li>
+          <li><a href="/admin/config">Configurações</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <section class="toolbar">
+        <input id="search" placeholder="Buscar por nome ou tipo..." aria-label="Buscar eventos" />
+      </section>
+
+      <section class="table-wrap">
+        <table id="events-table" class="events-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Data</th>
+              <th>Valor Final</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal (formulário) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content" role="document">
+      <header class="modal-header">
+        <h3 id="modal-title">Novo Evento</h3>
+        <button id="modal-close" class="modal-close" aria-label="Fechar">&times;</button>
+      </header>
+
+      <form id="event-form" class="event-form" autocomplete="off">
+        <input type="hidden" name="id_evento" />
+
+        <label class="field">
+          <span class="label-text">Nome do Evento</span>
+          <input name="nome_evento" required />
+        </label>
+
+        <label class="field">
+          <span class="label-text">Tipo</span>
+          <select name="tipo_evento">
+            <option value="">-- selecione --</option>
+            <option value="Casamento">Casamento</option>
+            <option value="15 anos">15 anos</option>
+            <option value="Infantil">Infantil</option>
+            <option value="Corporativo">Corporativo</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="label-text">Cliente ID</span>
+          <input name="id_cliente" />
+        </label>
+
+        <div class="row">
+          <label class="field">
+            <span class="label-text">Data</span>
+            <input type="date" name="data_evento" required />
+          </label>
+
+          <label class="field">
+            <span class="label-text">Hora Início</span>
+            <input type="time" name="hora_inicio" />
+          </label>
+
+          <label class="field">
+            <span class="label-text">Hora Término</span>
+            <input type="time" name="hora_termino" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="label-text">Endereço externo</span>
+          <input name="local_externo_endereco" />
+        </label>
+
+        <div class="row">
+          <label class="field">
+            <span class="label-text">Valor orçamento inicial</span>
+            <input type="number" step="0.01" name="valor_orcamento_inicial" />
+          </label>
+
+          <label class="field">
+            <span class="label-text">Valor contrato final</span>
+            <input id="valor_final" type="number" step="0.01" name="valor_contrato_final" />
+          </label>
+
+          <label class="field">
+            <span class="label-text">Custos adicionais</span>
+            <input id="custos" type="number" step="0.01" name="custos_adicionais" />
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="field">
+            <span class="label-text">Status pagamento</span>
+            <select name="status_pagamento">
+              <option value="pendente">Pendente</option>
+              <option value="pago">Pago</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="label-text">Status evento</span>
+            <select name="status_evento">
+              <option value="agendado">Agendado</option>
+              <option value="em andamento">Em andamento</option>
+              <option value="finalizado">Finalizado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="label-text">Feedback</span>
+          <textarea name="feedback_cliente" rows="3"></textarea>
+        </label>
+
+        <div class="modal-actions">
+          <button type="submit" id="save-btn" class="btn-primary">Salvar</button>
+          <button type="button" id="cancel-btn" class="btn-ghost">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript-warning">Este painel precisa de JavaScript para funcionar corretamente.</div>
+  </noscript>
+
+  <!-- Script do painel (colocar em static/js/admin.js) -->
+  <script src="/static/js/admin.js" defer></script>
+
+</body>
+</html>

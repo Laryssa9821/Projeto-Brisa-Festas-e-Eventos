@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login - Celebrar+</title>
+  <style>
+    body{font-family:Inter,Arial;padding:40px;background:#f7fbff}
+    .box{max-width:420px;margin:40px auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+    input{width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #ccc}
+    button{background:#1f547e;color:#fff;padding:10px 16px;border-radius:8px;border:0;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Entrar — Adm</h2>
+    <label>Email</label>
+    <input id="email" type="email" />
+    <label>Senha</label>
+    <input id="password" type="password" />
+    <div style="margin-top:12px;display:flex;gap:8px;">
+      <button id="btnLogin">Entrar</button>
+    </div>
+    <p id="msg" style="color:red"></p>
+  </div>
+
+<script>
+const btn = document.getElementById('btnLogin');
+btn.addEventListener('click', async () => {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({email, password})
+  });
+  if (res.ok) {
+    const j = await res.json();
+    // se for admin, redireciona ao painel
+    if (j.is_admin) {
+      window.location.href = '/admin';
+    } else {
+      // caso tenha users não-admin, pode redirecionar para area do cliente
+      window.location.href = '/';
+    }
+  } else {
+    const err = await res.json();
+    document.getElementById('msg').innerText = err.error || 'Erro ao logar';
+  }
+});
+</script>
+</body>
+</html>

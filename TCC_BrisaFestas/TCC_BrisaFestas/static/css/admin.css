@@ -1,0 +1,402 @@
+/* =========================================================
+   VARIABLES
+========================================================= */
+:root {
+  --pink: #e45088;
+  --pink-light: #f06bbd;
+  --green: #17a8a1;
+  --green-dark: #2793ae;
+  --yellow: #F1C40F;
+  --blue: #3498DB;
+  --purple: #9B59B6;
+  --orange: #E67E22;
+
+  --white: #FFFFFF;
+  --dark: #2C3E50;
+
+  --gray-100: #f6f7fb;
+  --gray-200: #ecf0f1;
+  --gray-300: #e6e9ef;
+  --gray-400: #d0d6dd;
+  --gray-600: #7F8C8D;
+  --gray-800: #333;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+/* =========================================================
+   RESET + BASE
+========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+  overflow-y: auto;
+  font-family: 'Poppins', sans-serif;
+  color: var(--dark);
+  background: var(--gray-100);
+}
+
+body {
+  padding-top: 80px;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 28px;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-300);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.admin-header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.btn, button {
+  cursor: pointer;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--white);
+  box-shadow: 0 6px 16px rgba(23,168,161,0.25);
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  color: var(--gray-800);
+}
+
+.btn-ghost:hover {
+  background: var(--gray-200);
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+.admin-layout {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+.admin-aside {
+  width: 230px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  border: 1px solid var(--gray-300);
+  box-shadow: var(--shadow-sm);
+  height: calc(100vh - 120px);
+  position: sticky;
+  top: 100px;
+}
+
+.admin-aside nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-aside a {
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--dark);
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.admin-aside a:hover {
+  background: var(--gray-200);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+.admin-main {
+  flex: 1;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toolbar #search {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-300);
+  width: 320px;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+.table-wrap {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--gray-300);
+  box-shadow: var(--shadow-md);
+}
+
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.events-table th,
+.events-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: 0.95rem;
+}
+
+.events-table th {
+  background: var(--gray-100);
+  color: var(--gray-600);
+  font-weight: 700;
+}
+
+.events-table tbody tr:hover {
+  background: var(--gray-200);
+}
+
+/* Action buttons */
+.btn-edit {
+  background: var(--blue);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+
+.btn-delete {
+  background: var(--pink);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+
+.btn-download {
+  background: var(--green);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  text-decoration: none;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  z-index: 2000;
+}
+
+.modal.hidden { display: none; }
+
+.modal-content {
+  width: 900px;
+  max-width: 95%;
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.modal-close {
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.event-form .field {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.label-text {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-bottom: 6px;
+}
+
+.event-form input,
+.event-form select,
+.event-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+
+.row {
+  display: flex;
+  gap: 14px;
+}
+
+.row .field {
+  flex: 1;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 900px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-aside {
+    width: 100%;
+    position: relative;
+    height: auto;
+    top: 0;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}
+/* =========================================
+   MODAL RESPONSIVO E FORM MELHOR ORGANIZADO
+========================================= */
+
+/* Ajuste geral no modal */
+.modal-content {
+  width: 100%;
+  max-width: 850px;        /* ainda grande no PC */
+  max-height: 90vh;        /* impede de passar da tela */
+  overflow-y: auto;        /* scroll suave dentro do modal */
+  padding: 22px;
+  border-radius: 14px;
+}
+
+/* O formulário ocupa toda a largura */
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Linhas com 2–3 itens ficam lado a lado no PC */
+.row {
+  display: flex;
+  gap: 14px;
+}
+
+/* Campo */
+.field {
+  flex: 1;
+}
+
+/* 💥 RESPONSIVIDADE — celular */
+@media (max-width: 768px) {
+
+  .modal-content {
+    max-width: 95%;
+    height: auto;
+    max-height: 90vh;
+  }
+
+  .row {
+    flex-direction: column;   /* empilha tudo */
+  }
+
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-aside {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+
+  .toolbar #search {
+    width: 100%;
+  }
+}
+.event-form input,
+.event-form select,
+.event-form textarea {
+  font-size: 1rem;
+  padding: 12px 14px;
+}
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;  /* evita colar nas bordas do celular */
+}
